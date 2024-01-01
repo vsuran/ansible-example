@@ -1,0 +1,24 @@
+---
+- name: Install and Configure Nginx
+  # hosts: localhost
+  become: yes  # Run tasks as root
+
+  tasks:
+    - name: Install Nginx
+      yum:
+        name: nginx
+        state: present  # Ensure nginx is installed
+
+    - name: Change the listening port to 8000
+      lineinfile:
+        path: /etc/nginx/nginx.conf
+        regexp: '^ *listen'
+        line: '    listen 8000 default_server;'
+        backrefs: yes
+
+    - name: Start and enable Nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
