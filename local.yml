@@ -1,21 +1,35 @@
 ---
 - name: Install and Configure Nginx
   hosts: localhost
-  become: yes  # Run tasks as root
+  become: yes
 
   tasks:
     - name: Install Nginx
       yum:
         name: nginx
-        state: present  # Ensure nginx is installed
+        state: present
 
-    - name: Change the listening port to 8000
+    - name: Change the listening port to 8080
       lineinfile:
         path: /etc/nginx/nginx.conf
         regexp: '^ *listen'
-        line: '    listen 8000 default_server;'
+        line: '    listen 8080 default_server;'
         backrefs: yes
 
+    - name: Create a simple 'Hello World' index.html
+      copy:
+        content: |
+          <html>
+            <head><title>Hello World</title></head>
+            <body>
+              <h1>Hello, World!</h1>
+            </body>
+          </html>
+        dest: /usr/share/nginx/html/index.html
+        owner: nginx
+        group: nginx
+        mode: '0644'
+  
     - name: Start and enable Nginx
       service:
         name: nginx
