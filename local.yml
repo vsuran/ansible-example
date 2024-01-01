@@ -1,6 +1,6 @@
 ---
 - name: Install and Configure Nginx
-  # hosts: localhost
+  hosts: localhost
   become: yes  # Run tasks as root
 
   tasks:
@@ -21,4 +21,5 @@
         name: nginx
         state: started
         enabled: yes
+
 
