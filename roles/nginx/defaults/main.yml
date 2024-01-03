@@ -1,3 +1,2 @@
 ---
-# Default variables for the Nginx role
-nginx_port: 80  # default HTTP port
+nginx_port: 80 
