@@ -1,39 +1,39 @@
----
-- name: Install and Configure Nginx
-  hosts: localhost
-  become: yes
+# ---
+# - name: Install and Configure Nginx
+#   hosts: localhost
+#   become: yes
 
-  tasks:
-    - name: Install Nginx
-      yum:
-        name: nginx
-        state: present
+#   tasks:
+#     - name: Install Nginx
+#       yum:
+#         name: nginx
+#         state: present
 
-    - name: Change the listening port to 8080
-      lineinfile:
-        path: /etc/nginx/nginx.conf
-        regexp: '^ *listen'
-        line: '    listen 8080 default_server;'
-        backrefs: yes
+#     - name: Change the listening port to 8080
+#       lineinfile:
+#         path: /etc/nginx/nginx.conf
+#         regexp: '^ *listen'
+#         line: '    listen 8080 default_server;'
+#         backrefs: yes
 
-    - name: Create a simple 'Hello World' index.html
-      copy:
-        content: |
-          <html>
-            <head><title>Hello World</title></head>
-            <body>
-              <h1>Hello, World!</h1>
-            </body>
-          </html>
-        dest: /usr/share/nginx/html/index.html
-        owner: nginx
-        group: nginx
-        mode: '0644'
+#     - name: Create a simple 'Hello World' index.html
+#       copy:
+#         content: |
+#           <html>
+#             <head><title>Hello World</title></head>
+#             <body>
+#               <h1>Hello, World!</h1>
+#             </body>
+#           </html>
+#         dest: /usr/share/nginx/html/index.html
+#         owner: nginx
+#         group: nginx
+#         mode: '0644'
   
-    - name: Start and enable Nginx
-      service:
-        name: nginx
-        state: started
-        enabled: yes
+#     - name: Start and enable Nginx
+#       service:
+#         name: nginx
+#         state: started
+#         enabled: yes
 
 
